@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Analysis Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0d1b1e;
+            --secondary-dark: #1d3633;
+            --accent-green: #4a9375;
+            --accent-light: #88a47c;
+            --text-primary: #e8f3e8;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .analysis-container {
+            background: rgba(13, 27, 30, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid var(--accent-green);
+            box-shadow: 0 0 30px rgba(74, 147, 117, 0.1);
+        }
+
+        .plant-image, .backend-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--accent-light);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .plant-image:hover, .backend-image:hover {
+            transform: scale(1.02);
+        }
+
+        .condition-title {
+            color: var(--accent-light);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(29, 54, 51, 0.3);
+            border-left: 4px solid var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .analysis-script {
+            background: var(--secondary-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(136, 164, 124, 0.2);
+            line-height: 1.6;
+        }
+
+        /* Typography for analysis-script content */
+        .analysis-script h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .analysis-script h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .analysis-script h3 {
+            font-size: 1.25rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .analysis-script p {
+            margin: 0.5rem 0;
+        }
+
+        .analysis-script ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+            margin: 0.5rem 0;
+        }
+
+        .analysis-script li {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="analysis-container">
+        <img src="{{ uploaded_image }}" alt="Uploaded Plant Image" class="plant-image">
+        {% if filename %}
+        {% if filename.lower().split('.')[-1] in ['png', 'jpg', 'jpeg', 'gif'] %}
+            <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+        {% else %}
+            <p>Download your file: <a href="{{ url_for('uploaded_file', filename=filename) }}">{{ filename }}</a></p>
+        {% endif %}
+    {% endif %}
+
+        
+    </div>
+    <h2 class="condition-title">
+        Condition: <span style="color: var(--accent-green);">Water logging</span>
+    </h2>
+    
+    <div class="analysis-script">
+        <h1>Water logging</h1>
+        <h2>Symptoms:</h2>
+        <ul>
+            <li>Abnormal plant growth: Flooding can limit oxygen and sunlight, which can lead to abnormal plant growth.</li>
+            <li>Pests and diseases: Poor drainage can lead to an increase in the incidence of pests and diseases.</li>
+            <li>Yield loss: Flooding can lead to yield loss or death of rice plants.</li>
+        </ul>
+    
+        <h2>Cure:</h2>
+        <ul>
+            <li>Use rice varieties that are tolerant of submergence.</li>
+            <li>Improve drainage.</li>
+            <li>Install field channels.</li>
+            <li>Use common/community seed beds.</li>
+            <li>Plant nearby fields at the same time.</li>
+            <li>Practice direct wet seeding.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
